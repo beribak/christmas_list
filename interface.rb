@@ -47,10 +47,15 @@ until user_action == "quit"
 		html_doc.search('.v2-listing-card_info') do |element|
 			# etsy_name = element.search('.text-body').text.strip
 			etsy_name = element.search('.text-body').text.strip
-			etsy_gifts << {name: etsy_name, price: 10}
+			etsy_price = element.search('.currency-value').text.strip.to_i
+			etsy_gifts << {name: etsy_name, price: etsy_price, marked: false}
 		end
 		etsy_gifts.each_with_index do |gift, index|		
 			puts "#{index + 1}. #{gift[:name]} $#{gift[:price]}" 
 		end		
+
+		puts "Pick one to add to your list (give the number)"
+	    gift_index = gets.chomp.to_i - 1
+		gift_list << etsy_gifts[gift_index]
 	end
 end
