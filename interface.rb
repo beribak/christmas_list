@@ -1,5 +1,5 @@
 require "open-uri"
-require "nokogiri"
+require 'nokogiri'
 
 puts "========================================="
 puts "Welcome to your christmas list."
@@ -44,7 +44,7 @@ until user_action == "quit"
 		html_doc = Nokogiri::HTML(response)
 		etsy_gifts = [{name: "asfasf", price: 33}]
 
-		html_doc.search('.v2-listing-card_info') do |element|
+		html_doc.search('.v2-listing-card__info').each do |element|
 			# etsy_name = element.search('.text-body').text.strip
 			etsy_name = element.search('.text-body').text.strip
 			etsy_price = element.search('.currency-value').text.strip.to_i
